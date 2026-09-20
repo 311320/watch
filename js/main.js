@@ -16,20 +16,48 @@
   const earth = $('.earth');
   const orbit = $('.orbit');
   const path = $('.orbit-line');
-  const craft = $('#craft');
+  const rocketAnchor = $('.rocket-anchor');
+  const rocketPose = $('.rocket-pose');
+  const rocketVisual = $('.rocket-visual');
   const pathLength = path.getTotalLength();
-  const orbitTravel = { progress: 0 };
+  const orbitStart = 0.07;
+  const orbitTravel = { progress: orbitStart };
 
-  function placeCraft() {
+  function smoothstep(start, end, value) {
+    const t = Math.max(0, Math.min(1, (value - start) / (end - start)));
+    return t * t * (3 - 2 * t);
+  }
+
+  function placeRocket() {
     const distance = pathLength * orbitTravel.progress;
     const point = path.getPointAtLength(distance);
-    const next = path.getPointAtLength(Math.min(pathLength, distance + 2));
-    const angle = Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI;
-    craft.setAttribute('transform', `translate(${point.x} ${point.y}) rotate(${angle})`);
+    const before = path.getPointAtLength(Math.max(0, distance - 2));
+    const after = path.getPointAtLength(Math.min(pathLength, distance + 2));
+    let angle = Math.atan2(after.y - before.y, after.x - before.x) * 180 / Math.PI;
+    if (orbitTravel.progress > 0.5 && angle < 0) angle += 360;
+    const svgPoint = orbit.createSVGPoint();
+    svgPoint.x = point.x;
+    svgPoint.y = point.y;
+    const screenPoint = svgPoint.matrixTransform(path.getScreenCTM());
+    const stageRect = stage.getBoundingClientRect();
+    // The drawn SVG path is the sole source of the image center at every viewport.
+    gsap.set(rocketAnchor, {
+      x: screenPoint.x - stageRect.left,
+      y: screenPoint.y - stageRect.top
+    });
+    const travel = (orbitTravel.progress - orbitStart) / (0.995 - orbitStart);
+    const proximity = smoothstep(0, 0.18, travel) *
+      (1 - smoothstep(0.18, 0.36, travel));
+    const nearScale = window.innerWidth <= 600 ? 1.3 : window.innerWidth <= 900 ? 1.45 : 1.6;
+    const scale = 0.42 + (nearScale - 0.42) * proximity;
+    gsap.set(rocketVisual, { scale });
+    // The image points about 35 degrees above horizontal; align that axis with travel.
+    gsap.set(rocketPose, { rotation: angle + 35 });
   }
 
   function earthTargetSize() {
-    return orbit.getBoundingClientRect().width * 0.48;
+    // The supplied 960 px image has a 44.4% radius within its square frame.
+    return orbit.getBoundingClientRect().width * 0.54;
   }
 
   function earthScale() {
@@ -37,7 +65,7 @@
   }
 
   function earthY() {
-    const top = window.innerHeight * (window.innerWidth <= 600 ? 0.68 : 0.66);
+    const top = earth.offsetTop;
     const targetCenter = window.innerHeight * (window.innerWidth <= 600 ? 0.53 : window.innerWidth <= 900 ? 0.57 : 0.51);
     return targetCenter - top - earthTargetSize() / 2;
   }
@@ -48,7 +76,7 @@
   gsap.set('.time-bridge', { y: 12 });
   gsap.set('.time-line', { scaleX: 0 });
   gsap.set('.watch-primary', { y: 18 });
-  placeCraft();
+  placeRocket();
 
   const timeline = gsap.timeline({
     defaults: { ease: 'none' },
@@ -60,6 +88,7 @@
       scrub: 0.7,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      onRefresh: placeRocket,
       onUpdate: self => gsap.set('.progress-fill', { scaleX: self.progress })
     }
   });
@@ -71,18 +100,24 @@
     .to('.hero-unit', { y: -42, opacity: 0, duration: 0.65 }, 0.70)
     .to('.hero-subtitle', { y: -18, opacity: 0, duration: 0.48 }, 0.79)
     .to('.hero-note, .scroll-cue', { opacity: 0, duration: 0.35 }, 0.55)
-    .to('.stars-far', { x: 10, y: -30, duration: 4.1 }, 0.45)
-    .to('.stars-near', { x: -12, y: -66, duration: 4.1 }, 0.45)
+    .to(earth, { opacity: 1, duration: 0.66 }, 0.02)
+    .to('.stars-far', { x: 5, y: -12, duration: 4.1 }, 0.45)
+    .to('.stars-near', { x: -7, y: -24, duration: 4.1 }, 0.45)
     .to(earth, { scale: earthScale, y: earthY, duration: 1.10, ease: 'power2.inOut' }, 0.67)
     .to(orbit, { opacity: 1, duration: 0.62 }, 1.06)
     .to('.orbit-meta', { opacity: 0.65, duration: 0.4 }, 1.32)
     .to('.launch-copy', { opacity: 1, y: 0, duration: 0.48 }, 1.27)
+    .to(rocketAnchor, { opacity: 1, duration: 0.30 }, 1.13)
 
     // Every point on the orbit is tied to the same scroll progress.
-    .to(orbitTravel, { progress: 0.995, duration: 2.91, onUpdate: placeCraft }, 1.57)
-    .to('.earth-surface', { rotation: 13, duration: 2.95, transformOrigin: '50% 50%' }, 1.57)
-    .to(earth, { x: -12, duration: 2.75 }, 1.72)
-    .to(earth, { scale: () => earthScale() * 1.025, duration: 2.3 }, 2.06)
+    .to(orbitTravel, { progress: 0.995, duration: 3.28, onUpdate: placeRocket }, 1.20)
+    .to('.rocket-trail', { opacity: 0.78, duration: 0.39 }, 1.61)
+    .to('.rocket-exhaust', { opacity: 0.75, duration: 0.39 }, 1.61)
+    .to('.rocket-trail', { opacity: 0.12, duration: 0.57 }, 2.05)
+    .to('.rocket-exhaust', { opacity: 0.20, duration: 0.57 }, 2.05)
+    .to('.earth-surface', { rotation: 3, duration: 2.95, transformOrigin: '50% 50%' }, 1.57)
+    .to(earth, { x: -20, duration: 2.75 }, 1.72)
+    .to(earth, { scale: () => earthScale() * 1.055, duration: 2.3 }, 2.06)
     .to('.launch-copy', { opacity: 0, y: -14, duration: 0.33 }, 1.91)
     .to('.orbit-copy', { opacity: 1, y: 0, duration: 0.36 }, 2.12)
     .to('.orbit-copy', { opacity: 0, y: -14, duration: 0.32 }, 2.72)
@@ -92,8 +127,8 @@
     .to('.return-copy', { opacity: 0, y: -15, duration: 0.33 }, 4.40)
 
     // The flight ends before the anniversary typography begins.
-    .to('.orbit, .orbit-meta', { opacity: 0, duration: 0.45 }, 4.42)
-    .to(earth, { scale: () => earthScale() * 0.38, y: () => earthY() - window.innerHeight * 0.12, opacity: 0, duration: 0.55, ease: 'power2.in' }, 4.37)
+    .to('.orbit, .orbit-meta, .rocket-anchor', { opacity: 0, duration: 0.45 }, 4.42)
+    .to(earth, { scale: () => earthScale() * 0.46, y: () => earthY() - window.innerHeight * 0.22, opacity: 0, duration: 0.64, ease: 'power2.inOut' }, 4.28)
     .to('.transition-108', { opacity: 1, y: 0, duration: 0.35 }, 4.90)
     .to('.transition-108', { scale: 1.16, opacity: 0, duration: 0.30, ease: 'power1.in' }, 5.75)
 

@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#05080d">
   <meta name="description" content="Космос. 65 лет спустя — демонстрация истории первого полёта человека в космос и лимитированной серии часов.">
   <title>КОСМОС — 65 лет спустя</title>
-  <link rel="preload" as="image" href="assets/svg/earth.svg">
+  <link rel="preload" as="image" href="assets/images/earth-orbit.png">
   <link rel="preload" as="image" href="assets/images/watch-primary.webp">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="vendor/gsap.min.js"></script>
@@ -26,7 +26,7 @@
           <span class="stage-index">ЭПИЗОД 01 / 01</span>
         </div>
 
-        <div class="earth" aria-hidden="true"><div class="earth-surface"></div></div>
+        <div class="earth" aria-hidden="true"><img class="earth-surface" src="assets/images/earth-orbit.png" width="960" height="960" alt="" fetchpriority="high"></div>
 
         <svg class="orbit" viewBox="0 0 1000 700" aria-hidden="true">
           <defs>
@@ -42,14 +42,18 @@
           <circle cx="500" cy="50" r="2" class="orbit-dot"/>
           <circle cx="900" cy="355" r="2" class="orbit-dot"/>
           <circle cx="500" cy="650" r="2" class="orbit-dot"/>
-          <g class="craft" id="craft">
-            <circle r="16" fill="#c5d4db" opacity=".08"/>
-            <path d="M-35 0h16" stroke="#c9d9df" stroke-width="1" stroke-linecap="round" opacity=".38"/>
-            <path d="M-15 0H-5M5 0H15M0-7v14" stroke="#dce5e8" stroke-width="1.4"/>
-            <circle r="5" fill="#d6dedf"/>
-            <circle r="2.4" fill="#182734"/>
-          </g>
         </svg>
+        <div class="rocket-anchor" aria-hidden="true">
+          <div class="rocket-pose">
+            <div class="rocket-centering">
+              <div class="rocket-visual">
+                <span class="rocket-trail"></span>
+                <span class="rocket-exhaust"></span>
+                <img src="assets/images/vostok-rocket.png" width="1505" height="1045" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="hero-copy">
           <p class="eyebrow hero-date">12 АПРЕЛЯ 1961</p>
@@ -114,7 +118,7 @@
 
     <div class="reduced-story" aria-label="История первого полёта и часов Космос">
       <section class="reduced-panel reduced-hero"><p class="eyebrow">12 АПРЕЛЯ 1961</p><h1>108<br><span>МИНУТ</span></h1><p>изменившие историю</p></section>
-      <section class="reduced-panel reduced-orbit"><p class="eyebrow">09:07 · БАЙКОНУР</p><h2>СТАРТ</h2><p>Восток-1 совершил один виток вокруг Земли.</p></section>
+      <section class="reduced-panel reduced-orbit"><p class="eyebrow">09:07 · БАЙКОНУР</p><h2>СТАРТ</h2><p>Восток-1 совершил один виток вокруг Земли.</p><img class="reduced-rocket" src="assets/images/vostok-rocket.png" width="1505" height="1045" alt="Ракета Восток"></section>
       <section class="reduced-panel reduced-anniversary"><p>108 минут изменили историю.</p><h2>65<br><span>ЛЕТ СПУСТЯ</span></h2></section>
       <section class="reduced-panel reduced-product"><p class="eyebrow">КОСМОС</p><img src="assets/images/watch-primary.webp" width="171" height="301" alt="Часы Космос с Землёй и космической композицией на циферблате"><h2>65 ЛЕТ СПУСТЯ</h2><p>Лимитированная серия, посвящённая первому полёту человека в космос</p></section>
     </div>
