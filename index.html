@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05080d">
+  <meta name="description" content="Космос. 65 лет спустя — демонстрация истории первого полёта человека в космос и лимитированной серии часов.">
+  <title>КОСМОС — 65 лет спустя</title>
+  <link rel="preload" as="image" href="assets/svg/earth.svg">
+  <link rel="preload" as="image" href="assets/images/watch-primary.webp">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="vendor/gsap.min.js"></script>
+  <script defer src="vendor/ScrollTrigger.min.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body>
+  <main>
+    <section class="story" aria-label="От первого полёта к часам Космос">
+      <div class="stage">
+        <div class="space-wash" aria-hidden="true"></div>
+        <div class="stars stars-far" aria-hidden="true"></div>
+        <div class="stars stars-near" aria-hidden="true"></div>
+
+        <div class="stage-top" aria-hidden="true">
+          <span class="wordmark">КОСМОС <span class="wordmark-line"></span> 1961—2026</span>
+          <span class="stage-index">ЭПИЗОД 01 / 01</span>
+        </div>
+
+        <div class="earth" aria-hidden="true"><div class="earth-surface"></div></div>
+
+        <svg class="orbit" viewBox="0 0 1000 700" aria-hidden="true">
+          <defs>
+            <linearGradient id="orbitGrad" x1="0" x2="1">
+              <stop stop-color="#9fb0b9" stop-opacity=".04"/>
+              <stop offset=".52" stop-color="#a5b5c0" stop-opacity=".62"/>
+              <stop offset="1" stop-color="#9fb0b9" stop-opacity=".05"/>
+            </linearGradient>
+          </defs>
+          <path class="orbit-line" d="M100 355 C100 178 278 50 500 50 C722 50 900 178 900 355 C900 532 722 650 500 650 C278 650 100 532 100 355"/>
+          <path class="orbit-guide" d="M100 355 C100 178 278 50 500 50 C722 50 900 178 900 355 C900 532 722 650 500 650 C278 650 100 532 100 355"/>
+          <path d="M500 28v14M500 658v14M78 355h14M908 355h14" class="orbit-ticks"/>
+          <circle cx="500" cy="50" r="2" class="orbit-dot"/>
+          <circle cx="900" cy="355" r="2" class="orbit-dot"/>
+          <circle cx="500" cy="650" r="2" class="orbit-dot"/>
+          <g class="craft" id="craft">
+            <circle r="16" fill="#c5d4db" opacity=".08"/>
+            <path d="M-35 0h16" stroke="#c9d9df" stroke-width="1" stroke-linecap="round" opacity=".38"/>
+            <path d="M-15 0H-5M5 0H15M0-7v14" stroke="#dce5e8" stroke-width="1.4"/>
+            <circle r="5" fill="#d6dedf"/>
+            <circle r="2.4" fill="#182734"/>
+          </g>
+        </svg>
+
+        <div class="hero-copy">
+          <p class="eyebrow hero-date">12 АПРЕЛЯ 1961</p>
+          <h1><span class="hero-number">108</span><span class="hero-unit">МИНУТ</span></h1>
+          <p class="hero-subtitle">изменившие историю</p>
+        </div>
+        <div class="hero-note microcopy">ВОСТОК-1 <span class="micro-divider"></span> ОРБИТА ЗЕМЛИ</div>
+        <div class="scroll-cue"><span>ЛИСТАЙТЕ</span><span class="scroll-arrow">↓</span></div>
+
+        <div class="launch-copy moment">
+          <span class="moment-number">01 / 04</span>
+          <p class="moment-time">09:07</p>
+          <h2>СТАРТ</h2>
+          <p class="moment-caption">Байконур</p>
+        </div>
+        <div class="orbit-copy moment">
+          <span class="moment-number">02 / 04</span>
+          <h2>ВЫХОД<br>НА ОРБИТУ</h2>
+          <p class="moment-caption">Восток-1</p>
+        </div>
+        <div class="flight-copy moment">
+          <span class="moment-number">03 / 04</span>
+          <h2>ОДИН ВИТОК<br>ВОКРУГ ЗЕМЛИ</h2>
+          <p class="moment-caption">Первый полёт человека в космос</p>
+        </div>
+        <div class="return-copy moment">
+          <span class="moment-number">04 / 04</span>
+          <h2>ВОЗВРАЩЕНИЕ</h2>
+          <p class="moment-caption">Полёт длился 108 минут</p>
+        </div>
+        <div class="orbit-meta microcopy">ОРБИТА ЗЕМЛИ <span class="micro-divider"></span> VOSTOK 1</div>
+
+        <div class="transition-copy" aria-hidden="true">
+          <div class="transition-108"><span class="transition-figure">108</span><span class="transition-label">МИНУТ</span></div>
+          <div class="transition-65"><span class="transition-figure">65</span><span class="transition-label">ЛЕТ СПУСТЯ</span></div>
+        </div>
+        <div class="time-bridge" aria-hidden="true">
+          <span>12.04.1961</span><span class="time-line"></span><span>12.04.2026</span>
+        </div>
+        <div class="match-ring" aria-hidden="true"></div>
+
+        <div class="product-scene">
+          <div class="product-halo" aria-hidden="true"></div>
+          <p class="product-kicker eyebrow">12.04.1961 <span class="micro-divider"></span> 12.04.2026</p>
+          <h2 class="product-title">КОСМОС</h2>
+          <img class="watch watch-secondary" src="assets/images/watch-secondary.webp" width="169" height="299" alt="Вторая модель часов серии Космос с космонавтом на циферблате">
+          <img class="watch watch-primary" src="assets/images/watch-primary.webp" width="171" height="301" alt="Часы Космос с Землёй и космической композицией на циферблате">
+          <div class="product-copy">
+            <p class="product-era">65 ЛЕТ СПУСТЯ</p>
+            <p class="product-description">Лимитированная серия, посвящённая первому полёту человека в космос</p>
+          </div>
+          <span class="product-edition microcopy">ПОСВЯЩЕНИЕ ПЕРВОМУ ПОЛЁТУ</span>
+        </div>
+
+        <div class="stage-bottom" aria-hidden="true">
+          <span>12 / 04 / 1961</span>
+          <div class="progress-track"><div class="progress-fill"></div></div>
+          <span>65 ЛЕТ</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="reduced-story" aria-label="История первого полёта и часов Космос">
+      <section class="reduced-panel reduced-hero"><p class="eyebrow">12 АПРЕЛЯ 1961</p><h1>108<br><span>МИНУТ</span></h1><p>изменившие историю</p></section>
+      <section class="reduced-panel reduced-orbit"><p class="eyebrow">09:07 · БАЙКОНУР</p><h2>СТАРТ</h2><p>Восток-1 совершил один виток вокруг Земли.</p></section>
+      <section class="reduced-panel reduced-anniversary"><p>108 минут изменили историю.</p><h2>65<br><span>ЛЕТ СПУСТЯ</span></h2></section>
+      <section class="reduced-panel reduced-product"><p class="eyebrow">КОСМОС</p><img src="assets/images/watch-primary.webp" width="171" height="301" alt="Часы Космос с Землёй и космической композицией на циферблате"><h2>65 ЛЕТ СПУСТЯ</h2><p>Лимитированная серия, посвящённая первому полёту человека в космос</p></section>
+    </div>
+  </main>
+</body>
+</html>

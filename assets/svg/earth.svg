@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" role="img" aria-label="Стилизованная Земля">
+  <defs>
+    <radialGradient id="ocean" cx="35%" cy="19%" r="80%">
+      <stop stop-color="#244c64"/>
+      <stop offset=".38" stop-color="#102b3d"/>
+      <stop offset=".71" stop-color="#091927"/>
+      <stop offset="1" stop-color="#03070d"/>
+    </radialGradient>
+    <radialGradient id="light" cx="25%" cy="10%" r="80%">
+      <stop stop-color="#e6f1ee" stop-opacity=".42"/>
+      <stop offset=".35" stop-color="#b3d6d4" stop-opacity=".1"/>
+      <stop offset="1" stop-color="#07131c" stop-opacity=".68"/>
+    </radialGradient>
+    <clipPath id="sphere"><circle cx="500" cy="500" r="494"/></clipPath>
+  </defs>
+  <circle cx="500" cy="500" r="497" fill="#597b8f" opacity=".18"/>
+  <g clip-path="url(#sphere)">
+    <circle cx="500" cy="500" r="494" fill="url(#ocean)"/>
+    <g fill="#6d8991" opacity=".17">
+      <path d="M0 180c91-34 143-18 188-3l39 40 68 7 44 46-22 31-62-1-42 28-24 75-35 36-11 76-45 11-31-58-36-15-36-108-64-22z"/>
+      <path d="M265 397l49-20 53 8 14 44 52 36 2 91-40 78-17 121-38 55-34-27-3-69-40-59-14-96-26-52z"/>
+      <path d="M432 169l63-43 97-10 35 29 103-18 104 24 106 67 52 118-67 33-65-33-56 32-73-10-26 47-78-3-33-49-77 3-21-39-63-1-45-50z"/>
+      <path d="M510 390l75-31 75 22 36 64-20 84-47 42-22 108-60 73-41-21-19-107-47-74 7-88z"/>
+      <path d="M751 630l64-20 83 35 44 73-49 76-100-12-54-70z"/>
+    </g>
+    <g fill="none" stroke="#d7e7e6" stroke-linecap="round" opacity=".085">
+      <path stroke-width="17" d="M-27 225c129 16 181 82 284 72s147-71 261-43 171 93 335 35 219-9 307 9"/>
+      <path stroke-width="10" d="M-50 353c146-31 224 57 334 34 106-22 149-74 275-48s249 27 454-61"/>
+      <path stroke-width="15" d="M-24 501c161 61 223-14 323-1 153 20 220 103 345 63s186-91 374-59"/>
+      <path stroke-width="9" d="M5 625c129-28 258-12 343 17s132 68 264 39 212-3 359 46"/>
+    </g>
+    <circle cx="500" cy="500" r="494" fill="url(#light)"/>
+    <path d="M-10 679c253-155 515-165 1017-1v360H-10z" fill="#02070c" opacity=".28"/>
+  </g>
+  <circle cx="500" cy="500" r="493.5" fill="none" stroke="#b8d9e3" stroke-opacity=".28" stroke-width="2"/>
+</svg>
