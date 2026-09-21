@@ -68,7 +68,8 @@
   function earthY() {
     const top = earth.offsetTop;
     const targetCenter = window.innerHeight * (window.innerWidth <= 600 ? 0.53 : window.innerWidth <= 900 ? 0.57 : 0.51);
-    return targetCenter - top - earthTargetSize() / 2;
+    const mobileLift = window.innerWidth <= 600 ? 22 : 0;
+    return targetCenter - top - earthTargetSize() / 2 - mobileLift;
   }
 
   gsap.set(earth, { xPercent: -50, transformOrigin: '50% 0%' });
@@ -187,7 +188,7 @@
         };
       }
 
-      gsap.set(watch, { opacity: 0, scale: 1.08, y: 8, clipPath: 'circle(0% at 27.5% 35%)' });
+      gsap.set(watch, { yPercent: -50, opacity: 0, scale: 1.08, y: 8, clipPath: 'circle(0% at 27.5% 35%)' });
       gsap.set(earthBridge, { opacity: 0, scale: 1.04 });
       gsap.set('.product-halo', { opacity: 0.25 });
 
